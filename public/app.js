@@ -1,4 +1,4 @@
-const url = "/api/todos";
+const url = "/api/todos/";
 var list = document.getElementById('list')
 var enter = document.getElementById('todoInput');
 
@@ -17,7 +17,7 @@ $('ul').on('click', "button", function(e){
    var clickedId = $(this).parent().prop("id")
    $.ajax({
        method:'DELETE',
-       url: "/api/todos/" + clickedId
+       url: url + clickedId
    })
    .then(data => console.log(data))
    $(this).parent().remove();
@@ -29,7 +29,7 @@ $('ul').on('click', "li", function(){
     var clickedId = $(this).prop("id")
    $.ajax({
       method:'PUT',
-      url: "/api/todos/" + clickedId,
+      url: url + clickedId,
       data: updateData
   })
   .then(data => console.log(data))
@@ -61,7 +61,7 @@ function addTodos(todo){
 // JQUERY
 function createTodo() {
     var usrInput = enter.value;
-    $.post('/api/todos', {name:usrInput})
+    $.post(url, {name:usrInput})
     .then(newTodo => {
         addTodo(newTodo)
         enter.value = ""
